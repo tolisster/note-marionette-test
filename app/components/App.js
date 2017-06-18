@@ -1,10 +1,10 @@
 import {Marionette} from '../../vendor/vendor';
-import ItemView from './ItemView';
+import LayoutView from './LayoutView';
 
 export default Marionette.Application.extend({
   region: '#app',
 
   onStart() {
-    this.showView(new ItemView());
+    this.showView(new LayoutView());
   }
 });

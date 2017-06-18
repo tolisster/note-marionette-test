@@ -3,17 +3,28 @@
   font-family: -apple-system, system, sans-serif;
 }
 
-#content {
-  width: 480px;
-  margin: 0 auto;
+html, body, #app {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.main {
+  flex: 1;
+  display: flex;
+}
+.main div {
+  flex: 1;
 }
 
 h1 {
   margin-bottom: 0.5em;
   font-size: 10em;
-  background-image: url(//browserify.org/images/wizard_hat_blue.png);
-  background-repeat: no-repeat;
-  background-position: 2px;
 }
 
 a {
