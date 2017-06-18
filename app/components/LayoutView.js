@@ -1,5 +1,6 @@
 import {Marionette} from '../../vendor/vendor';
 import HeaderView from './HeaderView';
+import NoteCollectionView from './NoteCollectionView';
 import template from '../templates/Layout.jst';
 
 export default Marionette.View.extend({
@@ -14,5 +15,6 @@ export default Marionette.View.extend({
 
   onRender() {
     this.showChildView('header', new HeaderView());
+    this.showChildView('list', new NoteCollectionView());
   }
 });
