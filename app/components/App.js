@@ -1,4 +1,4 @@
-import {Marionette} from '../../vendor/vendor';
+import {Backbone, Marionette} from '../../vendor/vendor';
 import LayoutView from './LayoutView';
 
 export default Marionette.Application.extend({
@@ -6,5 +6,6 @@ export default Marionette.Application.extend({
 
   onStart() {
     this.showView(new LayoutView());
+    Backbone.history.start();
   }
 });

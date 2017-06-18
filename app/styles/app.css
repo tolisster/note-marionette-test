@@ -29,7 +29,6 @@ body {
 #app .list > div {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 #app .list > ul {
   list-style: none;
