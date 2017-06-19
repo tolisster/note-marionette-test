@@ -3,5 +3,8 @@ import template from '../templates/NoteItem.jst';
 
 export default Marionette.View.extend({
   tagName: 'li',
-  template: template
+  template: template,
+  modelEvents: {
+    change: 'render'
+  }
 });

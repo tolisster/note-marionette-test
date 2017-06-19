@@ -18,19 +18,24 @@ body {
   flex: 1;
   display: flex;
 }
-#app .main > div {
-  flex: 1;
-}
 #app header > div {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
 }
-#app .list > div {
-  display: flex;
-  justify-content: center;
+#app .list {
+  width: 20%;
 }
 #app .list > ul {
   list-style: none;
   margin: 0;
+}
+#app .editor {
+  flex: 1;
+  display: flex;
+}
+#app .editor textarea {
+  flex: 1;
+  resize: none;
+  background-color: Snow;
 }
