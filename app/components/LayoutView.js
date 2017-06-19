@@ -15,15 +15,25 @@ export default Marionette.View.extend({
     footer: 'footer'
   },
 
-  onRender() {
-    const noteCollection = new NoteCollection;
+  initialize() {
+    this.noteCollection = new NoteCollection;
+    this.noteCollectionView = new NoteCollectionView({
+      collection: this.noteCollection,
+    });
+    this.noteEditorView = new NoteEditorView({
+      collection: this.noteCollection,
+    });
+  },
 
+  onRender() {
     this.showChildView('header', new HeaderView());
-    this.showChildView('list', new NoteCollectionView({
-      collection: noteCollection,
-    }));
-    this.showChildView('editor', new NoteEditorView({
-      collection: noteCollection,
-    }));
+    this.showChildView('list', this.noteCollectionView);
+    this.showChildView('editor', this.noteEditorView);
+  },
+
+  onChildviewCreateItem() {
+    const note = this.noteCollection.create();
+    this.noteEditorView.setModel(note);
+    this.noteCollectionView.setSelected(note);
   }
 });

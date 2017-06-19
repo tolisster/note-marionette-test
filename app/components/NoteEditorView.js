@@ -15,9 +15,7 @@ export default Marionette.View.extend({
       if (this.model) {
         this.model.set('content', content);
       } else {
-        this.model = this.collection.create({
-          content: content
-        });
+        this.triggerMethod('create:item');
       }
     } else {
       if (this.model) {
@@ -25,5 +23,14 @@ export default Marionette.View.extend({
         this.model = null;
       }
     }
+  },
+
+  setModel(model) {
+    if (this.model) {
+      this.$el.val('');
+      this.$el.focus();
+    }
+    this.model = model;
+    this.render();
   }
 });
