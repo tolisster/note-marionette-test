@@ -1,6 +1,6 @@
-# Browserify + Gulp + MarionetteJS + Babel/ES6
+# Notes with twitter-style tags
 
-This is a modern JS skeleton with MarionetteJS for [Browserify](http://browserify.org/) + [Gulp](http://gulpjs.com/).
+A text editor for notes with twitter-style tags support.
 
 ## Getting started
 
@@ -9,6 +9,3 @@ This is a modern JS skeleton with MarionetteJS for [Browserify](http://browserif
 * Run:
     * `npm start` — starts project
     * `npm run build` - builds you project
-* Learn:
-    * `public/` dir is fully auto-generated and served by HTTP server.  Write your code in `app/` dir.
-    * Place static files you want to be copied from `app/assets/` and `app/styles/` to `public/`.
