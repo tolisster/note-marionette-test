@@ -10,6 +10,8 @@ export default Marionette.View.extend({
   onRender() {
     if (this.model) {
       this.$el.val(this.model.get('content'));
+    } else {
+      this.$el.val('');
     }
   },
 
@@ -23,10 +25,12 @@ export default Marionette.View.extend({
       } else {
         this.triggerMethod('create:item');
       }
-    } else {
-      if (this.model) {
-        this.model.destroy();
-        this.model = null;
+
+      const tags = content.match(/\#\w+/g);
+      if (tags) {
+        this.model.set('tags', tags.map((tag) => tag.substr(1)));
+      } else {
+        this.model.set('tags', []);
       }
     }
   },

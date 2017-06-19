@@ -43,6 +43,7 @@ export default Marionette.View.extend({
 
   onChildviewRemoveItem() {
     this.noteEditorView.model.destroy();
+    this.noteEditorView.setModel(null);
   },
 
   onChildviewSelectedModel(model) {
