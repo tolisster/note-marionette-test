@@ -1,4 +1,4 @@
-import {Marionette} from '../../vendor/vendor';
+import {_, Marionette} from '../../vendor/vendor';
 import NoteCollection from '../collections/NoteCollection';
 import HeaderView from './HeaderView';
 import NoteCollectionView from './NoteCollectionView';
@@ -20,20 +20,32 @@ export default Marionette.View.extend({
     this.noteCollectionView = new NoteCollectionView({
       collection: this.noteCollection,
     });
-    this.noteEditorView = new NoteEditorView({
-      collection: this.noteCollection,
-    });
+    this.noteEditorView = new NoteEditorView();
   },
 
   onRender() {
     this.showChildView('header', new HeaderView());
     this.showChildView('list', this.noteCollectionView);
     this.showChildView('editor', this.noteEditorView);
+
+    this.createItem();
   },
 
-  onChildviewCreateItem() {
+  createItem() {
     const note = this.noteCollection.create();
     this.noteEditorView.setModel(note);
     this.noteCollectionView.setSelected(note);
-  }
+  },
+
+  onChildviewCreateItem() {
+    this.createItem();
+  },
+
+  onChildviewRemoveItem() {
+    this.noteEditorView.model.destroy();
+  },
+
+  onChildviewSelectedModel(model) {
+    this.noteEditorView.setModel(model);
+  },
 });

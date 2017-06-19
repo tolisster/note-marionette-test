@@ -23,6 +23,9 @@ body {
   flex-flow: row wrap;
   justify-content: flex-end;
 }
+#app header button.remove {
+  background-color: Coral;
+}
 #app .list {
   width: 20%;
 }

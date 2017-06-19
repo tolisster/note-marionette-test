@@ -4,6 +4,7 @@ import template from '../templates/Header.jst';
 export default Marionette.View.extend({
   template: template,
   triggers: {
-    'click .new': 'create:item'
+    'click .new': 'create:item',
+    'click .remove': 'remove:item'
   }
 });

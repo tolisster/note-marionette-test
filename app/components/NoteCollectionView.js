@@ -7,12 +7,17 @@ export default Marionette.CollectionView.extend({
   childView: NoteItemView,
   tagName: 'ul',
 
-  onChildviewSelectItem(childView) {
+  selectItem(childView) {
     this.children.each((child) => child.setSelected(child === childView));
+  },
+
+  onChildviewSelectItem(childView) {
+    this.selectItem(childView);
+    this.triggerMethod('selected:model', childView.model);
   },
 
   setSelected(model) {
     const childView = this.children.findByModel(model);
-    this.onChildviewSelectItem(childView);
+    this.selectItem(childView);
   }
 });

@@ -7,6 +7,12 @@ export default Marionette.View.extend({
     'input': 'onInput',
   },
 
+  onRender() {
+    if (this.model) {
+      this.$el.val(this.model.get('content'));
+    }
+  },
+
   onInput() {
     const content = this.$el.val().trim();
     console.log('input');
@@ -26,11 +32,8 @@ export default Marionette.View.extend({
   },
 
   setModel(model) {
-    if (this.model) {
-      this.$el.val('');
-      this.$el.focus();
-    }
     this.model = model;
     this.render();
+    this.$el.focus();
   }
 });
