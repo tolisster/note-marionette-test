@@ -1,9 +1,7 @@
 import {Marionette} from '../../vendor/vendor';
-import NoteEmptyView from './NoteEmptyView';
 import NoteItemView from './NoteItemView';
 
 export default Marionette.CollectionView.extend({
-  emptyView: NoteEmptyView,
   childView: NoteItemView,
   tagName: 'ul',
 
@@ -12,7 +10,6 @@ export default Marionette.CollectionView.extend({
   },
 
   onChildviewSelectItem(childView) {
-    this.selectItem(childView);
     this.triggerMethod('selected:model', childView.model);
   },
 

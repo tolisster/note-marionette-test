@@ -1,4 +1,4 @@
-import {_, Marionette} from '../../vendor/vendor';
+import {Marionette} from '../../vendor/vendor';
 import NoteCollection from '../collections/NoteCollection';
 import HeaderView from './HeaderView';
 import NoteCollectionView from './NoteCollectionView';
@@ -20,21 +20,40 @@ export default Marionette.View.extend({
     this.noteCollectionView = new NoteCollectionView({
       collection: this.noteCollection,
     });
-    this.noteEditorView = new NoteEditorView();
   },
 
   onRender() {
     this.showChildView('header', new HeaderView());
     this.showChildView('list', this.noteCollectionView);
-    this.showChildView('editor', this.noteEditorView);
 
-    this.createItem();
+    this.noteCollection.fetch();
+    if (!this.noteCollection.length) {
+      this.createItem();
+    } else {
+      this.setSelected(this.noteCollection.first());
+    }
   },
 
   createItem() {
     const note = this.noteCollection.create();
-    this.noteEditorView.setModel(note);
+    this.setSelected(note);
+  },
+
+  removeItem() {
+    const noteEditorView = this.getChildView('editor');
+    noteEditorView.model.destroy();
+    if (this.noteCollection.length) {
+      this.setSelected(this.noteCollection.first());
+    } else {
+      this.createItem();
+    }
+  },
+
+  setSelected(note) {
     this.noteCollectionView.setSelected(note);
+    this.showChildView('editor', new NoteEditorView({
+      model: note
+    }));
   },
 
   onChildviewCreateItem() {
@@ -42,11 +61,10 @@ export default Marionette.View.extend({
   },
 
   onChildviewRemoveItem() {
-    this.noteEditorView.model.destroy();
-    this.noteEditorView.setModel(null);
+    this.removeItem();
   },
 
-  onChildviewSelectedModel(model) {
-    this.noteEditorView.setModel(model);
+  onChildviewSelectedModel(note) {
+    this.setSelected(note);
   },
 });

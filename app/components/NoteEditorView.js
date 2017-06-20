@@ -5,39 +5,19 @@ export default Marionette.View.extend({
   template: _.noop,
   events: {
     'input': 'onInput',
+    'blur': 'onBlur'
   },
 
   onRender() {
-    if (this.model) {
-      this.$el.val(this.model.get('content'));
-    } else {
-      this.$el.val('');
-    }
+    this.$el.val(this.model.get('content'));
+    this.$el.focus();
   },
 
   onInput() {
-    const content = this.$el.val().trim();
-    console.log('input');
-
-    if (content) {
-      if (this.model) {
-        this.model.set('content', content);
-      } else {
-        this.triggerMethod('create:item');
-      }
-
-      const tags = content.match(/\#\w+/g);
-      if (tags) {
-        this.model.set('tags', tags.map((tag) => tag.substr(1)));
-      } else {
-        this.model.set('tags', []);
-      }
-    }
+    this.model.set('content', this.$el.val());
   },
 
-  setModel(model) {
-    this.model = model;
-    this.render();
-    this.$el.focus();
-  }
+  onBlur() {
+    this.model.save();
+  },
 });
